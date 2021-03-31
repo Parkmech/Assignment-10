@@ -1,0 +1,45 @@
+﻿@{
+    @*
+       If the home button is selected, "Full League Roster is displayed,
+       Otherwise the name of the selected team will be displayed
+    *@
+    ViewData["Title"] = "Home Page";
+    string teamName = "";
+
+    if(Model.TeamName == null)
+    {
+        teamName = "Full League Roster";
+    }
+    else
+    {
+        teamName = Model.TeamName;
+    }
+}
+
+@model IndexViewModel 
+
+<div class="text-center">
+    <p class="display-4">@teamName</p>
+</div>
+
+<!--Prints the Bowler names-->
+@foreach (var x in Model.Bowlers)
+{
+<div class= "m-2 row align-items-center border border-dark bg-white">
+
+    <div class="col-5">
+        <h3>@x.BowlerFirstName @x.BowlerMiddleInit @x.BowlerLastName</h3>
+    </div>
+    <div class="col-5">
+        <h5>@x.BowlerAddress @x.BowlerCity, @x.BowlerState @x.BowlerZip</h5>
+        <h5><i>@x.BowlerPhoneNumber</i></h5>
+    </div>
+
+</div>
+    
+}
+
+<!--Page Navigation buttons-->
+<div style="position: absolute; left: 275px; top: 640px;" page-info="@Model.PageNumberingInfo" page-url-mealtype="@Model.TeamName"
+     page-classes-enabled="true" page-class="btn" page-class-normal="btn-outline-dark"
+     page-class-selected="btn-info" class="btn-group pull-right m-1"></div>
